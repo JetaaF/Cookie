@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            position: relative;
+            /* left: 20vw; */
+            display: flex;
+            justify-content: center;
+            top: 49em;
+        }
+
+        div {
+
+            background-color: rgb(41, 47, 56);
+            width: 20em;
+            height: 5em;
+            font-size: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 15px;
+            color: white;
+        }
+
+        button {
+            background-color: rgb(255, 166, 0);
+            color: white;
+            width: 8em;
+            height: 2.5em;
+            font-size: 18px;
+        }
+        button:hover{
+            background-color: rgb(255, 89, 0);
+            color: rgb(139, 139, 139);
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div id="diva">
+        <p>Do you want to accept our cookies?</p>
+        <button id="butona">Accept</button>
+    </div>
+    <script>
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        //check if cookie is set
+        let user = getCookie("cookieACCEPTED");
+        if(user === ""){
+            document.getElementById("diva").style.display= "flex"
+        }
+
+        document.getElementById("butona").addEventListener("click", function(){
+            setCookie("cookieACCEPTED","true", 365) //cookie expires for 1year
+            document.getElementById("diva").style.display= "none"
+        })
+    </script>
+</body>
+
+</html>
